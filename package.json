@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/FrostBy/kingdomcomemap"
+    "url": "https://github.com/FrostBy/kingdomcomemap-tracker"
   },
   "private": true,
   "lint-staged": {
