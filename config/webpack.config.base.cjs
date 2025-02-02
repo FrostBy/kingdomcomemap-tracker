@@ -1,42 +1,40 @@
-const path = require("path");
+const path = require('path');
 
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const webpackConfig = {
   resolve: {
-    extensions: [".js", ".ts"],
+    extensions: ['.js', '.ts']
   },
   optimization: {
     minimize: false,
-    moduleIds: "named",
+    moduleIds: 'named'
   },
-  entry: "./src/index.ts",
+  entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, "../dist"),
+    path: path.resolve(__dirname, '../dist')
   },
-  target: "web",
-  externals: {
-    jquery: "$",
-  },
+  target: 'web',
+  externals: {},
   module: {
     rules: [
       {
         test: /\.m?ts$/,
         use: {
-          loader: "ts-loader",
-        },
+          loader: 'ts-loader'
+        }
       },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
+        use: ['style-loader', 'css-loader']
+      }
+    ]
   },
-  plugins: process.env.npm_config_report ? [new BundleAnalyzerPlugin()] : [],
+  plugins: process.env.npm_config_report ? [new BundleAnalyzerPlugin()] : []
 };
 
 module.exports = webpackConfig;

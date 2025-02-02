@@ -1,10 +1,28 @@
-# This is a project help you build userscript with webpack
+# TamperMonkey Extension to Track Visited Markers on the [Map](https://kingdomcomemap.github.io/)
+### This extension is designed for the map of `Kingdom Come: Deliverance` but can be easily adapted to any Leaflet map, as the marker handling logic is universal.
 
-Just [use this git repo as a template](https://github.com/Trim21/webpack-userscript-template/generate).
+This is a stream-of-consciousness level version, so feel free to submit pull requests for refactoring and code improvements.
 
-[中文说明](./readme.cn.md)
+## 🐞 Known Issues
 
-## dev
+- **Checkboxes in the sidebar are not fully synchronized.**
+  This doesn't affect the overall functionality, and fixing it was left for later (because, honestly, I didn’t feel like dealing with it).
+
+## License
+
+This project is licensed under a [custom license](./LICENSE).
+
+- You are free to use, modify, and distribute the code as long as proper attribution is provided.
+- **Commercial use is strictly prohibited without explicit written permission from the author.**
+- For commercial licensing inquiries, please contact: frost.by@gmail.com.
+
+## ☕ Support Me
+
+If you find this project useful, consider supporting me on [Buy Me a Coffee](https://buymeacoffee.com/vladromanovsky).
+
+---
+
+## For Devs
 
 1. Allow Tampermonkey's access to local file URIs [tampermonkey/faq](https://tampermonkey.net/faq.php?ext=dhdg#Q204)
 2. install deps with `npm i` or `npm ci`.
@@ -25,31 +43,9 @@ livereload is default enabled, use [this Chrome extension](https://chrome.google
 Everytime you change your metadata config,
 you'll have to restart webpack server and install newly generated `dist/index.dev.user.js` UserScript in your browser again.
 
-## used package
-
-If you prefer some other bundler like rollup, you can use some of these packages directly.
-
-[userscript-metadata-generator](https://github.com/trim21/userscript-metadata-generator)
-
-[gm-fetch](https://github.com/trim21/gm-fetch)
-
-[userscript-metadata-webpack-plugin](https://github.com/trim21/userscript-metadata-webpack-plugin)
-
-## Cross Site Request
-
-you can call `GM.xmlHttpRequest` directly or use a fetch API based on `GM.xmlHttpRequest` <https://github.com/Trim21/gm-fetch>
-
-## TypeScript
-
-use typescript as normal, see [example](src/index.ts)
-
-## dependencies
-
-There are two ways to using a package on npm.
-
 ### UserScript way
 
-like original UserScript way, you will need to add them to your [user script metadata's require section](./config/metadata.cjs#L16-L18) , and exclude them in [config/webpack.config.base.cjs](./config/webpack.config.base.cjs#L18-L20)
+like original UserScript way, you will need to add them to your [user script metadata's require section](./config/metadata.cjs) , and exclude them in [config/webpack.config.base.cjs](./config/webpack.config.base.cjs)
 
 ### Webpack way
 
@@ -62,25 +58,3 @@ npm run build
 ```
 
 `dist/index.prod.user.js` is the final script. you can manually copy it to greasyfork for deploy.
-
-### Minify
-
-There is a [limitation in greasyfork](https://greasyfork.org/en/help/code-rules), your code must not be obfuscated or minified.
-
-If you don't need to deploy your script to greasyfork, enable minify as you like.
-
-## automatically Deploy
-
-[github actions](./.github/workflows/deploy.yaml#L36) will deploy production userscript to gh-pages branch.
-
-[example](https://github.com/Trim21/webpack-userscript-template/tree/gh-pages)
-
-[deployed](https://trim21.github.io/webpack-userscript-template/index.prod.user.js)
-
-You can auto use greasyfork's auto update function.
-
-## Q&A
-
-you may find enabling source map not working well in production code, because Tampermonkey will add extra lines (all your `@require`) before your script. I don't know if there is a good fix for this, You need to use webpack config `devtool` with `eval` prefix to make it work as expected, so source map is disabled in this production build.
-
-<https://webpack.js.org/configuration/devtool/#development>

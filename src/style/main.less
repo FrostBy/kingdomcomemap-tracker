@@ -1,6 +1,119 @@
-@background_color: yellow;
+#found-markers {
+    position: fixed;
+    right: 0;
+    left: auto;
+    background-image: url(https://kingdomcomemap.github.io/assets/images/bg.png);
+    border-right: 1px solid #76643e;
+    z-index: 1000;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 
-body {
-    background-color: @background_color;
-    z-index: 20;
+    .sidebar-close {
+        left: 0;
+        .closed& .left-arrow {
+            transform: scaleX(1);
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPCEtLSFGb250IEF3ZXNvbWUgRnJlZSA2LjcuMiBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPgo8cGF0aCBkPSJNNDE2IDIwOGMwIDQ1LjktMTQuOSA4OC4zLTQwIDEyMi43TDUwMi42IDQ1Ny40YzEyLjUgMTIuNSAxMi41IDMyLjggMCA0NS4zcy0zMi44IDEyLjUtNDUuMyAwTDMzMC43IDM3NmMtMzQuNCAyNS4yLTc2LjggNDAtMTIyLjcgNDBDOTMuMSA0MTYgMCAzMjIuOSAwIDIwOFM5My4xIDAgMjA4IDBTNDE2IDkzLjEgNDE2IDIwOHpNMjg4IDE3NmMwLTQ0LjItMzUuOC04MC04MC04MHMtODAgMzUuOC04MCA4MGMwIDQ4LjggNDYuNSAxMTEuNiA2OC42IDEzOC42YzYgNy4zIDE2LjggNy4zIDIyLjcgMGMyMi4xLTI3IDY4LjYtODkuOCA2OC42LTEzOC42em0tMTEyIDBhMzIgMzIgMCAxIDEgNjQgMCAzMiAzMiAwIDEgMSAtNjQgMHoiLz4KPC9zdmc+');
+        }
+        .left-arrow {
+            transform: scaleX(-1);
+        }
+    }
+
+    .list-title {
+        padding-left: 24px;
+    }
+
+    .content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1 1 auto;
+        direction: rtl;
+        margin-left: -15px;
+        margin-right: -20px;
+        padding-left: 15px;
+    }
+
+    .found-list {
+        direction: ltr;
+        list-style: none;
+        float: none;
+        border: none;
+        padding: 6px;
+        margin: 0;
+        display: inline-block;
+        width: 100%;
+
+        label {
+            display: flex;
+            align-items: center;
+            font-family: '1529 Champ Fleury W01 Regular', serif;
+            font-size: 16px;
+            color: #1f201b;
+            width: 100%;
+            padding-left: 5px;
+        }
+
+        i {
+            display: flex;
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            float: left;
+            margin-right: 2px;
+            margin-bottom: 5px;
+            margin-top: 4px;
+            line-height: 30px;
+        }
+
+        li {
+            display: flex;
+            white-space: normal;
+            width: 100%;
+            overflow: hidden;
+            list-style: none;
+        }
+
+        .cc:indeterminate + .cl:after {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+    }
+
+    &.closed {
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+
+        .list-title {
+            display: none;
+        }
+
+        .content {
+            display: none;
+        }
+
+        & ~ #map .leaflet-control-container .leaflet-right {
+            right: 0;
+
+            .leaflet-bar {
+                right: 45px;
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.visited {
+    display: initial;
+    filter: grayscale(100%);
+}
+
+.leaflet-right {
+    right: 310px;
 }

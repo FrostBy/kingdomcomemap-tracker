@@ -1,19 +1,17 @@
-import "./style/main.less";
+import './style/main.less';
 
-//checkout homepage https://github.com/Trim21/gm-fetch for @trim21/gm-fetch
-import GM_fetch from "@trim21/gm-fetch";
+import MapInteractions from './mapInteractions';
+import Sidebar from './sidebar';
+async function init() {
+  const mapInteractions = new MapInteractions(map);
+  mapInteractions.init();
 
-async function main() {
-  console.log("script start");
-
-  // cross domain requests
-  console.log(`uuid: ${await fetchExample()}`);
+  const sidebar = new Sidebar(mapInteractions);
+  sidebar.init();
 }
 
-async function fetchExample(): Promise<string> {
-  const res = await GM_fetch("https://httpbin.org/uuid");
-  const data = await res.json();
-  return data.uuid;
+async function main() {
+  await init();
 }
 
 main().catch((e) => {
